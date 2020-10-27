@@ -17,4 +17,14 @@ class ProductData implements IProductData
 
     return $resultado;
   }
+
+  public function buscarProductoPorCodigo($codigo, $ruta)
+  {
+    $productos = $this->leerArchivoJson($ruta);
+    $productos = \json_decode($productos, true);
+
+    $encontradoEn = array_search($codigo, array_column($productos['productos'], 'codigo'));
+
+    return ($encontradoEn !== false) ? $productos['productos'][$encontradoEn] : false;
+  }
 }

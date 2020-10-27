@@ -25,6 +25,18 @@ final class ProductDataTest extends TestCase
           'nombre' => 'Test 3',
           'descripcion' => 'Producto test 3',
           'precio' => 12.89
+        ],
+        [
+          'codigo' => 'A004',
+          'nombre' => 'Test 4',
+          'descripcion' => 'Producto test 4',
+          'precio' => 59.658
+        ],
+        [
+          'codigo' => 'A005',
+          'nombre' => 'Test 5',
+          'descripcion' => 'Producto test 5',
+          'precio' => 0.55
         ]
 
       ]
@@ -36,5 +48,23 @@ final class ProductDataTest extends TestCase
     $listaObtenida = $productData->obtenerListadoProductos($ruta);
 
     $this->assertEquals($listaEsperada, $listaObtenida);
+  }
+
+  public function test_a_product_can_be_finded(): void
+  {
+    $esperado = [
+      'codigo' => 'A003',
+      'nombre' => 'Test 3',
+      'descripcion' => 'Producto test 3',
+      'precio' => 12.89
+    ];
+
+    $codigo = "A003";
+    $ruta = __DIR__ . "/resources/productos.json";
+
+    $productData = new ProductData();
+    $productoObtenido = $productData->buscarProductoPorCodigo($codigo, $ruta);
+
+    $this->assertEquals($esperado, $productoObtenido);
   }
 }
